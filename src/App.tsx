@@ -1,9 +1,13 @@
-import React from 'react';
+import Filter from './components/Filter';
 import './App.css';
+import Table from './components/Table';
 
 function App() {
   return (
-    <span>Hello, App!</span>
+    <div>
+      <Filter />
+      <Table />
+    </div>
   );
 }
 
