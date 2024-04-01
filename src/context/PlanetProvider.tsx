@@ -10,6 +10,9 @@ function PlanetProvider({ children }: PlanetProviderProps) {
   const [planets, setPlanets] = useState([]);
   const [filterName, setFilterName] = useState('');
   const [activeFilters, setActiveFilters] = useState<FilterValueType[]>([]);
+  const columns = [
+    'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water',
+  ];
 
   useEffect(() => {
     const fetchPlanets = async () => {
@@ -25,16 +28,8 @@ function PlanetProvider({ children }: PlanetProviderProps) {
     fetchPlanets();
   }, []);
 
-  const addFilter = () => {
-
-  };
-
-  const removeFilter = () => {
-
-  };
-
   const removeAllFilters = () => {
-
+    setActiveFilters([]);
   };
 
   const values = {
@@ -43,9 +38,8 @@ function PlanetProvider({ children }: PlanetProviderProps) {
     setFilterName,
     activeFilters,
     setActiveFilters,
-    addFilter,
-    removeFilter,
     removeAllFilters,
+    columns,
   };
 
   return (

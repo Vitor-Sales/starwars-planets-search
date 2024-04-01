@@ -20,10 +20,9 @@ export type ThisContextType = {
   filterName: string,
   setFilterName: (search: string) => void,
   activeFilters: FilterValueType[],
-  setActiveFilters: (filter: FilterValueType) => void,
-  addFilter: (filter: FilterValueType) => void,
-  removeFilter: (filter: FilterValueType) => void,
+  setActiveFilters: (filter: FilterValueType | FilterValueType[]) => void,
   removeAllFilters: () => void,
+  columns: string[];
 };
 
 export type FilterNameType = {
