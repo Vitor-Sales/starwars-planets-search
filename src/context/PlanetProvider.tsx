@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
 import PlanetContext from './PlanetContext';
-import { FilterNameType, PlanetType } from '../types';
+import { FilterValueType, PlanetType } from '../types';
 
 type PlanetProviderProps = {
   children: React.ReactNode,
 };
 
 function PlanetProvider({ children }: PlanetProviderProps) {
-  const [filter, setFilter] = useState('');
   const [planets, setPlanets] = useState([]);
+  const [filterName, setFilterName] = useState('');
+  const [activeFilters, setActiveFilters] = useState<FilterValueType[]>([]);
 
   useEffect(() => {
     const fetchPlanets = async () => {
@@ -37,7 +38,14 @@ function PlanetProvider({ children }: PlanetProviderProps) {
   };
 
   const values = {
-    planets, filter, setFilter, addFilter, removeFilter, removeAllFilters,
+    planets,
+    filterName,
+    setFilterName,
+    activeFilters,
+    setActiveFilters,
+    addFilter,
+    removeFilter,
+    removeAllFilters,
   };
 
   return (

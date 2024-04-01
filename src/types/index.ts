@@ -17,11 +17,19 @@ export type PlanetType = {
 
 export type ThisContextType = {
   planets: PlanetType[],
-  filter: string,
-  setFilter: (search: string) => void,
+  filterName: string,
+  setFilterName: (search: string) => void,
+  activeFilters: FilterValueType[],
+  setActiveFilters: (filter: FilterValueType) => void,
 };
 
 export type FilterNameType = {
   info: string,
   value: string,
+};
+
+export type FilterValueType = {
+  column: string,
+  comparison: string,
+  value: number,
 };

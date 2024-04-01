@@ -1,10 +1,10 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import PlanetContext from '../context/PlanetContext';
 
-function Filter() {
-  const { filter, setFilter } = useContext(PlanetContext);
+function FilterName() {
+  const { filterName, setFilterName } = useContext(PlanetContext);
 
-  console.log(filter);
+  console.log(filterName);
 
   return (
     <div>
@@ -14,11 +14,11 @@ function Filter() {
         id="searchInput"
         name="searchInput"
         data-testid="name-filter"
-        onChange={ (e) => setFilter(e.target.value) }
+        onChange={ (e) => setFilterName(e.target.value) }
       />
     </div>
 
   );
 }
 
-export default Filter;
+export default FilterName;
