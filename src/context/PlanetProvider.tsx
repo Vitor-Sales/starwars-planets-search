@@ -37,25 +37,25 @@ function PlanetProvider({ children }: PlanetProviderProps) {
     setActiveFilters([]);
   };
 
-  // const applyFilter = () => (
-  //   planets
-  //     .filter((planet) => planet.name.includes(filterName))
-  //     .filter((planet) => activeFilters.every(({ column, comparison, value }) => {
-  //       if (comparison === 'maior que') return Number(planet[column]) > value;
-  //       if (comparison === 'menor que') return Number(planet[column]) < value;
-  //       return Number(planet[column]) === value;
-  //     }))
-  // );
-
-  useEffect(() => {
-    setFilteredPlanets(planets
+  const applyFilter = () => (
+    planets
       .filter((planet) => planet.name.includes(filterName))
       .filter((planet) => activeFilters.every(({ column, comparison, value }) => {
         if (comparison === 'maior que') return Number(planet[column]) > value;
         if (comparison === 'menor que') return Number(planet[column]) < value;
         return Number(planet[column]) === value;
-      })));
-  }, [planets, filterName, activeFilters]);
+      }))
+  );
+
+  // useEffect(() => {
+  //   setFilteredPlanets(planets
+  //     .filter((planet) => planet.name.includes(filterName))
+  //     .filter((planet) => activeFilters.every(({ column, comparison, value }) => {
+  //       if (comparison === 'maior que') return Number(planet[column]) > value;
+  //       if (comparison === 'menor que') return Number(planet[column]) < value;
+  //       return Number(planet[column]) === value;
+  //     })));
+  // }, [planets, filterName, activeFilters]);
 
   const values = {
     planets,
@@ -67,8 +67,7 @@ function PlanetProvider({ children }: PlanetProviderProps) {
     columns,
     orderValue,
     setOrderValue,
-    filteredPlanets,
-    setFilteredPlanets,
+    applyFilter,
   };
 
   return (
