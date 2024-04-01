@@ -8,6 +8,7 @@ type PlanetProviderProps = {
 
 function PlanetProvider({ children }: PlanetProviderProps) {
   const [planets, setPlanets] = useState<PlanetType[]>([]);
+  const [filteredPlanets, setFilteredPlanets] = useState<PlanetType[]>(planets);
   const [filterName, setFilterName] = useState('');
   const [activeFilters, setActiveFilters] = useState<FilterValueType[]>([]);
   const columns = [
@@ -36,15 +37,25 @@ function PlanetProvider({ children }: PlanetProviderProps) {
     setActiveFilters([]);
   };
 
-  const applyFilter = () => (
-    planets
+  // const applyFilter = () => (
+  //   planets
+  //     .filter((planet) => planet.name.includes(filterName))
+  //     .filter((planet) => activeFilters.every(({ column, comparison, value }) => {
+  //       if (comparison === 'maior que') return Number(planet[column]) > value;
+  //       if (comparison === 'menor que') return Number(planet[column]) < value;
+  //       return Number(planet[column]) === value;
+  //     }))
+  // );
+
+  useEffect(() => {
+    setFilteredPlanets(planets
       .filter((planet) => planet.name.includes(filterName))
       .filter((planet) => activeFilters.every(({ column, comparison, value }) => {
         if (comparison === 'maior que') return Number(planet[column]) > value;
         if (comparison === 'menor que') return Number(planet[column]) < value;
         return Number(planet[column]) === value;
-      }))
-  );
+      })));
+  }, [planets, filterName, activeFilters]);
 
   const values = {
     planets,
@@ -56,7 +67,8 @@ function PlanetProvider({ children }: PlanetProviderProps) {
     columns,
     orderValue,
     setOrderValue,
-    applyFilter,
+    filteredPlanets,
+    setFilteredPlanets,
   };
 
   return (

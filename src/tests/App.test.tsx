@@ -1,8 +1,12 @@
 import React from 'react';
-// import { render, screen } from '@testing-library/react';
-// import App from '../App';
+import { render, screen } from '@testing-library/react';
+import App from '../App';
 
-test('I am your test', () => {
-  const I = "your father";
-  expect(I).toBe("your father");
-});
+describe('1 - Testando renderização inicial', () => {
+  it('Buscando titulo e inputs e seus valores iniciais.', () => {
+    render(<App/>)
+    const title = screen.getByLabelText('Projeto Star Wars');
+
+    expect(title).toBeInTheDocument();
+  })
+})

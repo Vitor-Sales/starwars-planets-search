@@ -3,16 +3,21 @@ import PlanetContext from '../context/PlanetContext';
 import { ColumnType, PlanetType } from '../types';
 
 function FilterOrder() {
-  const { columns, orderValue, setOrderValue, applyFilter } = useContext(PlanetContext);
+  const {
+    columns,
+    orderValue,
+    setOrderValue,
+    applyFilter,
+  } = useContext(PlanetContext);
 
-  const handleClick = () => {
-    applyFilter().sort((a: PlanetType, b: PlanetType) => {
-      if (orderValue.value === 'upwards') {
-        return a[orderValue.column] - b[orderValue.column];
-      }
-      return b[orderValue.column] - a[orderValue.column];
-    });
-  };
+  //   const handleClick = () => {
+  //     setFilteredPlanets(filteredPlanets.sort((a: PlanetType, b: PlanetType) => {
+  //       if (orderValue.value === 'upwards') {
+  //         return Number(a[orderValue.column]) - Number(b[orderValue.column]);
+  //       }
+  //       return Number(b[orderValue.column]) - Number(a[orderValue.column]);
+  //     }));
+  //   };
 
   return (
     <div>
@@ -43,7 +48,7 @@ function FilterOrder() {
         id="downward"
         onChange={ (e) => setOrderValue({ ...orderValue, value: e.target.value }) }
       />
-      <button onClick={ handleClick }>Order</button>
+      {/* <button onClick={ handleClick }>Order</button> */}
     </div>
   );
 }
