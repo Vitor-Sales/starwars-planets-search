@@ -21,6 +21,9 @@ export type ThisContextType = {
   setFilterName: (search: string) => void,
   activeFilters: FilterValueType[],
   setActiveFilters: (filter: FilterValueType) => void,
+  addFilter: (filter: FilterValueType) => void,
+  removeFilter: (filter: FilterValueType) => void,
+  removeAllFilters: () => void,
 };
 
 export type FilterNameType = {
