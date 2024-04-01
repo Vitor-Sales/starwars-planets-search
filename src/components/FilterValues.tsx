@@ -1,11 +1,10 @@
 import { useState, useContext, useEffect } from 'react';
 import PlanetContext from '../context/PlanetContext';
-import { FilterValueType } from '../types';
+import { ColumnType, FilterValueType } from '../types';
 
 function FilterValues() {
   const { activeFilters,
     setActiveFilters,
-    removeFilter,
     removeAllFilters,
     columns,
   } = useContext(PlanetContext);
@@ -23,21 +22,25 @@ function FilterValues() {
     setFilterValue({ ...filterValue, column: applyColumns()[0] });
   }, [activeFilters]);
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setActiveFilters([...activeFilters, filterValue]);
+  };
+
   return (
     <div>
       <form
-        onSubmit={
-            (e) => {
-              e.preventDefault();
-              setActiveFilters([...activeFilters, filterValue]);
-            }
-        }
+        onSubmit={ handleSubmit }
       >
         <select
           name="columns"
           id="columns"
           data-testid="column-filter"
-          onChange={ (e) => setFilterValue({ ...filterValue, column: e.target.value }) }
+          onChange={
+            (e) => setFilterValue({
+              ...filterValue, column: e.target.value as ColumnType,
+            })
+        }
         >
           {applyColumns().map((column) => (
             <option key={ column } value={ column }>{column}</option>
@@ -82,6 +85,7 @@ function FilterValues() {
       ))}
       <button
         onClick={ removeAllFilters }
+        disabled={ activeFilters.length === 0 }
         data-testid="button-remove-filters"
       >
         Remove All Filters

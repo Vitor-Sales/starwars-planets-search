@@ -3,17 +3,7 @@ import { PlanetType } from '../types';
 import PlanetContext from '../context/PlanetContext';
 
 function Table() {
-  const { planets, filterName, activeFilters } = useContext(PlanetContext);
-
-  const applyFilter = () => (
-    planets
-      .filter((planet) => planet.name.includes(filterName))
-      .filter((planet) => activeFilters.every(({ column, comparison, value }) => {
-        if (comparison === 'maior que') return Number(planet[column]) > value;
-        if (comparison === 'menor que') return Number(planet[column]) < value;
-        return Number(planet[column]) === value;
-      }))
-  );
+  const { applyFilter } = useContext(PlanetContext);
 
   return (
     <table>

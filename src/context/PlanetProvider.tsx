@@ -1,18 +1,22 @@
 import { useState, useEffect } from 'react';
 import PlanetContext from './PlanetContext';
-import { FilterValueType, PlanetType } from '../types';
+import { ColumnType, FilterValueType, PlanetType } from '../types';
 
 type PlanetProviderProps = {
   children: React.ReactNode,
 };
 
 function PlanetProvider({ children }: PlanetProviderProps) {
-  const [planets, setPlanets] = useState([]);
+  const [planets, setPlanets] = useState<PlanetType[]>([]);
   const [filterName, setFilterName] = useState('');
   const [activeFilters, setActiveFilters] = useState<FilterValueType[]>([]);
   const columns = [
     'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water',
-  ];
+  ] as ColumnType[];
+  const [orderValue, setOrderValue] = useState({
+    column: columns[0],
+    value: 'upward',
+  });
 
   useEffect(() => {
     const fetchPlanets = async () => {
@@ -32,6 +36,16 @@ function PlanetProvider({ children }: PlanetProviderProps) {
     setActiveFilters([]);
   };
 
+  const applyFilter = () => (
+    planets
+      .filter((planet) => planet.name.includes(filterName))
+      .filter((planet) => activeFilters.every(({ column, comparison, value }) => {
+        if (comparison === 'maior que') return Number(planet[column]) > value;
+        if (comparison === 'menor que') return Number(planet[column]) < value;
+        return Number(planet[column]) === value;
+      }))
+  );
+
   const values = {
     planets,
     filterName,
@@ -40,6 +54,9 @@ function PlanetProvider({ children }: PlanetProviderProps) {
     setActiveFilters,
     removeAllFilters,
     columns,
+    orderValue,
+    setOrderValue,
+    applyFilter,
   };
 
   return (

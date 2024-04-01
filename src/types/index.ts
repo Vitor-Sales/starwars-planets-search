@@ -18,11 +18,17 @@ export type PlanetType = {
 export type ThisContextType = {
   planets: PlanetType[],
   filterName: string,
-  setFilterName: (search: string) => void,
+  setFilterName: React.Dispatch<React.SetStateAction<string>>,
   activeFilters: FilterValueType[],
-  setActiveFilters: (filter: FilterValueType | FilterValueType[]) => void,
+  setActiveFilters: React.Dispatch<React.SetStateAction<FilterValueType[]>>,
   removeAllFilters: () => void,
-  columns: string[];
+  columns: ColumnType[];
+  orderValue: OrderValueType,
+  setOrderValue: React.Dispatch<React.SetStateAction<{
+    column: ColumnType;
+    value: string;
+  }>>,
+  applyFilter: () => PlanetType[],
 };
 
 export type FilterNameType = {
@@ -31,7 +37,18 @@ export type FilterNameType = {
 };
 
 export type FilterValueType = {
-  column: string,
+  column: ColumnType,
   comparison: string,
   value: number,
 };
+
+export type OrderValueType = {
+  column: ColumnType,
+  value: string,
+};
+
+export type ColumnType = 'population'
+| 'orbital_period'
+| 'diameter'
+| 'rotation_period'
+| 'surface_water';
