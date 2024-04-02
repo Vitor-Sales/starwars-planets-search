@@ -10,16 +10,17 @@ function FilterValues() {
   } = useContext(PlanetContext);
 
   const [filterValue, setFilterValue] = useState<FilterValueType>({
-    column: columns[0],
+    column: 'population',
     comparison: 'maior que',
     value: 0 });
 
   const applyColumns = () => (
-    columns.filter((column) => !activeFilters.some((filter) => filter.column === column))
+    columns && columns
+      .filter((column) => !activeFilters.some((filter) => filter.column === column))
   );
 
   useEffect(() => {
-    setFilterValue({ ...filterValue, column: applyColumns()[0] });
+    setFilterValue({ ...filterValue, column: applyColumns() && applyColumns()[0] });
   }, [activeFilters]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -42,7 +43,7 @@ function FilterValues() {
             })
         }
         >
-          {applyColumns().map((column) => (
+          {columns && applyColumns().map((column) => (
             <option key={ column } value={ column }>{column}</option>
           ))}
         </select>
@@ -71,7 +72,7 @@ function FilterValues() {
         />
         <button data-testid="button-filter">Filter</button>
       </form>
-      {activeFilters.map((filter) => (
+      {activeFilters && activeFilters.map((filter) => (
         <div key={ filter.column } data-testid="filter">
           <span>{`${filter.column} ${filter.comparison} ${filter.value}`}</span>
           <button
@@ -85,7 +86,6 @@ function FilterValues() {
       ))}
       <button
         onClick={ removeAllFilters }
-        disabled={ activeFilters.length === 0 }
         data-testid="button-remove-filters"
       >
         Remove All Filters

@@ -14,10 +14,6 @@ function PlanetProvider({ children }: PlanetProviderProps) {
   const columns = [
     'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water',
   ] as ColumnType[];
-  const [orderValue, setOrderValue] = useState({
-    column: columns[0],
-    value: 'upward',
-  });
 
   useEffect(() => {
     const fetchPlanets = async () => {
@@ -37,25 +33,25 @@ function PlanetProvider({ children }: PlanetProviderProps) {
     setActiveFilters([]);
   };
 
-  const applyFilter = () => (
-    planets
-      .filter((planet) => planet.name.includes(filterName))
-      .filter((planet) => activeFilters.every(({ column, comparison, value }) => {
-        if (comparison === 'maior que') return Number(planet[column]) > value;
-        if (comparison === 'menor que') return Number(planet[column]) < value;
-        return Number(planet[column]) === value;
-      }))
-  );
-
-  // useEffect(() => {
-  //   setFilteredPlanets(planets
+  // const applyFilter = () => (
+  //   planets
   //     .filter((planet) => planet.name.includes(filterName))
   //     .filter((planet) => activeFilters.every(({ column, comparison, value }) => {
   //       if (comparison === 'maior que') return Number(planet[column]) > value;
   //       if (comparison === 'menor que') return Number(planet[column]) < value;
   //       return Number(planet[column]) === value;
-  //     })));
-  // }, [planets, filterName, activeFilters]);
+  //     }))
+  // );
+
+  useEffect(() => {
+    setFilteredPlanets(planets
+      .filter((planet) => planet.name.includes(filterName))
+      .filter((planet) => activeFilters.every(({ column, comparison, value }) => {
+        if (comparison === 'maior que') return Number(planet[column]) > value;
+        if (comparison === 'menor que') return Number(planet[column]) < value;
+        return Number(planet[column]) === value;
+      })));
+  }, [planets, filterName, activeFilters]);
 
   const values = {
     planets,
@@ -65,9 +61,9 @@ function PlanetProvider({ children }: PlanetProviderProps) {
     setActiveFilters,
     removeAllFilters,
     columns,
-    orderValue,
-    setOrderValue,
-    applyFilter,
+    // applyFilter,
+    filteredPlanets,
+    setFilteredPlanets,
   };
 
   return (

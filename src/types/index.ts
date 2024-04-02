@@ -1,4 +1,5 @@
 export type PlanetType = {
+  [key: string]: string | string[] | undefined,
   name: string,
   rotation_period: string,
   orbital_period: string,
@@ -23,12 +24,9 @@ export type ThisContextType = {
   setActiveFilters: React.Dispatch<React.SetStateAction<FilterValueType[]>>,
   removeAllFilters: () => void,
   columns: ColumnType[];
-  orderValue: OrderValueType,
-  setOrderValue: React.Dispatch<React.SetStateAction<{
-    column: ColumnType;
-    value: string;
-  }>>,
-  applyFilter: () => PlanetType[],
+  // applyFilter: () => PlanetType[],
+  filteredPlanets: PlanetType[],
+  setFilteredPlanets: React.Dispatch<React.SetStateAction<PlanetType[]>>,
 };
 
 export type FilterNameType = {
@@ -44,7 +42,7 @@ export type FilterValueType = {
 
 export type OrderValueType = {
   column: ColumnType,
-  value: string,
+  sort: string,
 };
 
 export type ColumnType = 'population'
