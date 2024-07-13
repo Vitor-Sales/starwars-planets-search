@@ -1,6 +1,6 @@
 import { useContext } from 'react';
-import { PlanetType } from '../types';
-import PlanetContext from '../context/PlanetContext';
+import { PlanetType } from '../../types';
+import PlanetContext from '../../context/PlanetContext';
 
 function Table() {
   const { filteredPlanets } = useContext(PlanetContext);
@@ -18,10 +18,10 @@ function Table() {
           <th>Terrain</th>
           <th>Surface Water</th>
           <th>Population</th>
-          <th>Films</th>
+          {/* <th>Films</th>
           <th>Created</th>
           <th>Edited</th>
-          <th>URL</th>
+          <th>URL</th> */}
         </tr>
       </thead>
       <tbody>
@@ -36,10 +36,10 @@ function Table() {
             <td>{planet.terrain}</td>
             <td>{planet.surface_water}</td>
             <td>{planet.population}</td>
-            <td>{planet.films}</td>
+            {/* <td>{planet.films}</td>
             <td>{planet.created}</td>
             <td>{planet.edited}</td>
-            <td>{planet.url}</td>
+            <td>{planet.url}</td> */}
           </tr>
         ))}
       </tbody>

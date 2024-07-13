@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
-import PlanetContext from '../context/PlanetContext';
-import { ColumnType, PlanetType } from '../types';
+import PlanetContext from '../../context/PlanetContext';
+import { ColumnType, PlanetType } from '../../types';
 
 function FilterOrder() {
   const {

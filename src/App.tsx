@@ -1,17 +1,18 @@
 import FilterName from './components/FilterName';
-import './App.css';
-import Table from './components/Table';
 import FilterValues from './components/FilterValues';
 import FilterOrder from './components/FilterOrder';
+import Table from './components/Table';
+
+import style from './App.module.css';
 
 function App() {
   return (
-    <div>
+    <main className={ style.main }>
       <FilterName />
       <FilterValues />
       <FilterOrder />
       <Table />
-    </div>
+    </main>
   );
 }
 

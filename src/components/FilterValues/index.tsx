@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
-import PlanetContext from '../context/PlanetContext';
-import { ColumnType, FilterValueType } from '../types';
+import PlanetContext from '../../context/PlanetContext';
+import { ColumnType, FilterValueType } from '../../types';
 
 function FilterValues() {
   const { activeFilters,
