@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
 import PlanetContext from '../../context/PlanetContext';
 import { ColumnType, FilterValueType } from '../../types';
+import style from './style.module.css';
 
 function FilterValues() {
   const { activeFilters,
@@ -32,9 +33,11 @@ function FilterValues() {
     <div>
       <form
         onSubmit={ handleSubmit }
+        className={ style.form }
       >
         <select
           name="columns"
+          className={ style.select }
           id="columns"
           data-testid="column-filter"
           onChange={
@@ -49,13 +52,14 @@ function FilterValues() {
         </select>
         <select
           name="comparisons"
+          className={ style.select }
           id="comparisons"
           data-testid="comparison-filter"
           onChange={
-             (e) => setFilterValue({
-               ...filterValue,
-               comparison: e.target.value,
-             })
+            (e) => setFilterValue({
+              ...filterValue,
+              comparison: e.target.value,
+            })
 }
         >
           <option value="maior que">maior que</option>
@@ -64,13 +68,14 @@ function FilterValues() {
         </select>
         <input
           type="number"
+          className={ style.input }
           data-testid="value-filter"
           defaultValue={ filterValue.value }
           onChange={ (e) => {
             setFilterValue({ ...filterValue, value: Number(e.target.value) });
           } }
         />
-        <button data-testid="button-filter">Filter</button>
+        <button className={ style.button } data-testid="button-filter">Filter</button>
       </form>
       {activeFilters && activeFilters.map((filter) => (
         <div key={ filter.column } data-testid="filter">
@@ -86,6 +91,7 @@ function FilterValues() {
       ))}
       <button
         onClick={ removeAllFilters }
+        className={ style.button }
         data-testid="button-remove-filters"
       >
         Remove All Filters

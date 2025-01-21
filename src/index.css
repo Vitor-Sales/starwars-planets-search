@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -19,4 +21,19 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 30px;
+  background-color: #4d4d4d;
+  border-radius: 8px;
+}
+
+td, th {
+  border-bottom: 1px solid #282c3460;
+  border-right: 1px solid #282c3460;;
+  border-radius: 4px;
+  padding: 5px;
 }

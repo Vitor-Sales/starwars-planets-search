@@ -12,10 +12,11 @@ function FilterName() {
       >
         Projeto Star Wars - Trybe
       </h1>
-      <label htmlFor="searchInput">Search</label>
+      <label htmlFor="searchInput" className={ style.label }>Search</label>
       <input
         type="search"
         id="searchInput"
+        className={ style.input }
         name="searchInput"
         data-testid="name-filter"
         onChange={ (e) => setFilterName(e.target.value) }

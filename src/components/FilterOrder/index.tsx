@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import PlanetContext from '../../context/PlanetContext';
 import { ColumnType, PlanetType } from '../../types';
+import style from './style.module.css';
 
 function FilterOrder() {
   const {
@@ -40,9 +41,10 @@ function FilterOrder() {
   };
 
   return (
-    <div>
+    <form className={ style.form }>
       <select
         name="columnOrder"
+        className={ style.select }
         id="columnOrder"
         value={ orderValue.column }
         data-testid="column-sort"
@@ -53,8 +55,9 @@ function FilterOrder() {
         {columns && columns
           .map((column) => <option key={ column } value={ column }>{column}</option>)}
       </select>
-      <label htmlFor="upward">Upward</label>
+      <label className={ style.label } htmlFor="upward">Upward</label>
       <input
+        className={ style.input }
         type="radio"
         value="ASC"
         name="order"
@@ -62,8 +65,9 @@ function FilterOrder() {
         data-testid="column-sort-input-asc"
         onChange={ (e) => setOrderValue({ ...orderValue, sort: e.target.value }) }
       />
-      <label htmlFor="downward">Downward</label>
+      <label className={ style.label } htmlFor="downward">Downward</label>
       <input
+        className={ style.input }
         type="radio"
         value="DESC"
         name="order"
@@ -71,8 +75,14 @@ function FilterOrder() {
         data-testid="column-sort-input-desc"
         onChange={ (e) => setOrderValue({ ...orderValue, sort: e.target.value }) }
       />
-      <button onClick={ handleClick } data-testid="column-sort-button">Order</button>
-    </div>
+      <button
+        onClick={ handleClick }
+        data-testid="column-sort-button"
+        className={ style.button }
+      >
+        Order
+      </button>
+    </form>
   );
 }
 
